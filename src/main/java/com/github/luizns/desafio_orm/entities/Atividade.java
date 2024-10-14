@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "tb_atividade")
 public class Atividade {
@@ -24,6 +23,14 @@ public class Atividade {
 
     @OneToMany(mappedBy = "atividade")
     private Set<Bloco> blocos = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "atividade_participante",
+            joinColumns = @JoinColumn(name = "atividade_id"),
+            inverseJoinColumns = @JoinColumn(name = "participante_id")
+    )
+    private Set<Participante> participantes = new HashSet<>();
 
     public Atividade() {
     }
